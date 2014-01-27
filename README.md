@@ -38,5 +38,12 @@ Then get uwsgi and webapp2
     $ pip install WebOb
     $ pip install webapp2
 
+webapp2:
+::
+    $ pip install WebOb
+    $ pip install webapp2
 
-
+Databases:
+::
+    $ pip install pymongo
+    $ pip install elasticsearch
