@@ -31,10 +31,12 @@ Locate your nginx configuration file and possibly change the port it listens for
     $ vim /usr/local/etc/nginx/nginx.conf
     $ sudo nginx
 
-Then get uwsgi
+Then get uwsgi and webapp2
 
 ::
     $ pip install uwsgi
+    $ pip install WebOb
+    $ pip install webapp2
 
 
 
