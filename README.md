@@ -3,6 +3,7 @@ fortyTwo
 
 The XAL Application Framework, known as XAF or just fortyTwo. 
 
+
 To get started, simply type the following commands in you bash shell:
 
 ::
@@ -45,3 +46,5 @@ Databases:
 ::
     $ pip install pymongo
     $ pip install elasticsearch
+
+*Warning:* If you have installed python with homebrew on mac, the setup seems to not work.
