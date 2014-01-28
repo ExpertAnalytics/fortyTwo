@@ -6,8 +6,6 @@ The XAL Application Framework, known as XAF or just fortyTwo.
 
 To get started, simply type the following commands in you bash shell:
 
-::
-
     $ curl -O http://python-distribute.org/distribute_setup.py
     $ python distribute_setup.py
     $ sudo easy_install pip
