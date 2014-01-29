@@ -41,5 +41,6 @@ Databases:
 
     $ pip install pymongo
     $ pip install elasticsearch
+    $ pip install couchdb
 
 *Warning:* If you have installed python with homebrew on mac, the setup seems to not work.
