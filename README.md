@@ -35,8 +35,6 @@ Then get uwsgi and webapp2
 
 ::
     $ pip install uwsgi
-    $ pip install WebOb
-    $ pip install webapp2
 
 webapp2:
 ::
@@ -47,3 +45,12 @@ Databases:
 ::
     $ pip install pymongo
     $ pip install elasticsearch
+
+
+When done with setting up environment with pip, it is possible in the virtual
+env to do:
+ 
+   $ pip freeze > requirements.txt
+
+This will make a list of all the installed packages, with versioning numbers,
+for easy pinning of versions and recreation of the configuration.
