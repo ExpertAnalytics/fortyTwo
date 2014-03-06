@@ -1,10 +1,10 @@
-from brewshed.base import BaseItem
+from brewshed.base import BaseModel
 from brewshed.calculator.converter import Converter
 
 class ModificationError(Exception):
     pass
 
-class Item(BaseItem):
+class Item(BaseModel):
 
     def __init__(self, name, amount, quantity):
         self.name = name
