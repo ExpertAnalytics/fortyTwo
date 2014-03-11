@@ -1,8 +1,9 @@
+from pint import UnitRegistry
 
 class Converter(object):
 
+    ureg = UnitRegistry()
+
     @classmethod
     def convert(cls, amount, quantity, target_quantity):
-        # TODO: Use Scientific's physical quantities to convert amount from qty to target
-        assert quantity == target_quantity
-        return amount
+        return amount*cls.ureg[quantity].to(target_quantity)

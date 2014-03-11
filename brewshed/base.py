@@ -10,7 +10,7 @@ class Serializer(object):
 
     def __init__(self, backend=None, nameaspace=None):
         backend = CouchBackend if backend is None else backend
-        self.namespace =
+        self.namespace = ''
         self.backend = backend
 
     def save(self, obj, key=None):
@@ -36,9 +36,10 @@ class BaseBackend(object):
 class CouchBackend(BaseBackend):
 
     def __init__(self, namespace):
+        self.namespace = namespace
         self.backend = None
 
-    def dump(self, key):
+    def dump(self, data, key):
         raise NotImplementedError
 
     def get(self, key):
