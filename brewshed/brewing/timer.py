@@ -10,29 +10,28 @@ class Timer(object):
 
 class Schedule(object):
     """
-    The Schedule should contain a list of events (transitions between states in the brew process), and times
+    The Schedule should contain a list of events (transitions between states in the brew process). An event needs to
+    have a duration method returning the planned/estimated time of the state it initiates.
     when the events should occur.
     """
-    def __init__(self, recipe, *args, **kwargs):
-        self.recipe = recipe
-        self.events = recipe.events
-        self.current_step = 0
+    def __init__(self, events, *args, **kwargs):
+        self.events = events
 
-    def update(self, recipe):
+    def update(self, events, start, stop=None):
         """
         Update schedule for future events
         """
-        assert self.recipe is not None, "Cannot update Scheduler"
-        self.events[self.current_step:] = Schedule(recipe).events[self.current_step:]
+        if stop is not None:
+            assert stop < len(self.events)
+            self.events[start:stop] = events[:]
+        else:
+            self.events[start:] = events[:]
 
-    def next(self):
-        self.current_step += 1
-        return self.current_step
+    def step(self):
+        return self.events.pop()
 
-    def prev(self):
-        if self.current_step > 0:
-            self.current_step -= 1
-        return self.current_step
+   def duration(self):
+       return sum([event.duration() for event in self.events])
 
 
 class BrewLog(object):
