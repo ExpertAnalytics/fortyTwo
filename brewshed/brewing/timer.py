@@ -14,34 +14,34 @@ class Schedule(object):
     have a duration method returning the planned/estimated time of the state it initiates.
     when the events should occur.
     """
-    def __init__(self, events, *args, **kwargs):
-        self.events = events
+    def __init__(self, tasks, *args, **kwargs):
+        self.tasks = tasks
 
-    def update(self, events, start, stop=None):
+    def update(self, tasks, start, stop=None):
         """
         Update schedule for future events
         """
         if stop is not None:
-            assert stop < len(self.events)
-            self.events[start:stop] = events[:]
+            assert stop < len(self.tasks)
+            self.tasks[start:stop] = tasks[:]
         else:
-            self.events[start:] = events[:]
+            self.tasks[start:] = tasks[:]
 
     def step(self):
-        return self.events.pop()
+        return self.tasks.pop(0)  # Pop first entry in the event list
 
    def duration(self):
-       return sum([event.duration() for event in self.events])
+       return sum([task.duration() for task in self.tasks])
 
 
-class BrewLog(object):
+class Log(object):
     """
-    The brew log is similar to the Schedule, but it records when transitions actually takes place.
+    A log is similar to a Schedule, but it records when transitions actually takes place.
     """
 
     def __init__(self, schedule):
-        self.events = schedule.events[:]
+        self.schedule = schedule
         self.log = []
 
-    def step(self, time):
-        self.log.append((self.events.pop(), time))  # Store the entry as a tuple
+    def record(self, time):
+        self.log.append((self.schedule.step(), time))  # Store the entry as a tuple
