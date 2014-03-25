@@ -1,10 +1,17 @@
 import webapp2
-from jinja2 import FileSystemLoader
+from jinja2 import Environment, FileSystemLoader
+import os
+
+THIS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'templates')
+print THIS_DIR
+template_env = Environment(loader=FileSystemLoader(THIS_DIR), trim_blocks=True)
 
 class StrikeWaterTemperatureHandler(webapp2.RequestHandler):
 
     def get(self):
-        self.response.write(FileSystemLoader('/templates').load('strikewater.html'))
+        self.response.write(template_env.get_template('strikewater.html').render(
+            type='grain mass')
+        )
 
 
 class AboutHandler(webapp2.RequestHandler):
