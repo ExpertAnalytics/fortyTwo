@@ -30,7 +30,7 @@ class Schedule(object):
     def step(self):
         return self.tasks.pop(0)  # Pop first entry in the event list
 
-   def duration(self):
+    def duration(self):
        return sum([task.duration() for task in self.tasks])
 
 
