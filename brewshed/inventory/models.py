@@ -1,4 +1,4 @@
-from brewshed.base import BaseModel
+from brewshed.backend import BaseModel
 from brewshed.calculator.converter import Converter
 
 class ModificationError(Exception):

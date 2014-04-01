@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+     <title>Calculators</title>
+     <script type="text/javascript"
+             src="/js/angular-1.3.0-beta.3/angular.min.js"></script>
+ </head>
+    <body>
+    <script>
+        angular.module("myapp", [])
+        .controller("CalcCtrl", function($scope, $http) {
+            $scope.calculatorForm = {};
+            $scope.calculatorForm.calculator_id = 0;
+            $scope.calculatorUri = '';
+            $scope.calculatorLinkText = '';
+            $scope.formSubmitted = false;
+            $scope.calculatorForm.submitTheForm = function(item, event) {
+                console.log("--> Submitting the form");
+                console.log($scope.calculatorForm.calculator_id);
+                var responsePromise = $http.post("/calculator/"+$scope.calculatorForm.calculator_id+"/", {}, {});
+                responsePromise.success(function(dataFromServer, status, headers, config) {
+                    console.log(dataFromServer);
+                    $scope.calculatorUri = dataFromServer.form_uri;
+                    $scope.calculatorLinkText = dataFromServer.name;
+                    $scope.formSubmitted = true;
+                    console.log(headers);
+                });
+                responsePromise.error(function(data, status, headers, config) {
+                    alert("Submitting form failed!");
+                });
+            }
+        });
+    </script>
+    <h1>Brew Calculators</h1>
+    <div ng-controller="CalcCtrl" >
+    <form>
+        <select ng-model="calculatorForm.calculator_id">
+            {% for calculator in calculators %}
+            <option value="{{ calculator.id }}">{{ calculator.name }}</option>
+            {% endfor %}
+        </select>
+        <button ng-click="calculatorForm.submitTheForm()">Choose</button>
+    </form>
+        <div ng-show="formSubmitted">
+            <a ng-href=":{{ '{{' }} calculatorUri {{ '}}' }}">{{ '{{' }} calculatorLinkText {{ '}}' }}</a>
+        </div>
+    </div>
+
+    </body>
+</html>
