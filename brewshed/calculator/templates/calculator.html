@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="myapp">
+<html ng-app="calculator">
 <head>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
      <title>Calculators</title>
@@ -8,7 +8,7 @@
  </head>
     <body>
     <script>
-        angular.module("myapp", [])
+        angular.module("calculator", [])
         .controller("CalcCtrl", function($scope, $http) {
             $scope.calculatorForm = {};
             $scope.calculatorForm.calculator_id = 0;
@@ -16,18 +16,14 @@
             $scope.calculatorLinkText = '';
             $scope.formSubmitted = false;
             $scope.calculatorForm.submitTheForm = function(item, event) {
-                console.log("--> Submitting the form");
-                console.log($scope.calculatorForm.calculator_id);
                 var responsePromise = $http.post("/calculator/"+$scope.calculatorForm.calculator_id+"/", {}, {});
                 responsePromise.success(function(dataFromServer, status, headers, config) {
-                    console.log(dataFromServer);
                     $scope.calculatorUri = dataFromServer.form_uri;
                     $scope.calculatorLinkText = dataFromServer.name;
                     $scope.formSubmitted = true;
-                    console.log(headers);
                 });
                 responsePromise.error(function(data, status, headers, config) {
-                    alert("Submitting form failed!");
+                    alert("Submitting form failed, please report to ola@xal.no!");
                 });
             }
         });
@@ -43,7 +39,7 @@
         <button ng-click="calculatorForm.submitTheForm()">Choose</button>
     </form>
         <div ng-show="formSubmitted">
-            <a ng-href=":{{ '{{' }} calculatorUri {{ '}}' }}">{{ '{{' }} calculatorLinkText {{ '}}' }}</a>
+            <a ng-href="{{ '{{' }} calculatorUri {{ '}}' }}">{{ '{{' }} calculatorLinkText {{ '}}' }}</a>
         </div>
     </div>
 

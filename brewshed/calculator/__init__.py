@@ -20,8 +20,16 @@ web_app = WSGIApplication(
         Route('/about/',
               'brewshed.calculator.handlers.formulae.AboutHandler',
               name='about',
-              methods=('GET',),
-        )],
+              methods=('GET',)),
+        Route('/calculator/swt/',
+              'brewshed.calculator.handlers.formulae.StrikeWaterHandler',
+              name='swt',
+              methods=('GET','POST')),
+        Route('/calculator/wa/',
+              'brewshed.calculator.handlers.formulae.WaterAmountHandler',
+              name='wa',
+              methods=('GET','POST')),
+    ],
     debug=True)
 
 

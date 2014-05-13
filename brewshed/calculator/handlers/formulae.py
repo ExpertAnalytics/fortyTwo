@@ -24,8 +24,6 @@ class CalculatorHandler(BrewshedHandler):
     @template('calculator.html')
     def get(self):
         return dict(calculators=calculator_mocks)
-        #self.response.write(template_env.get_template('calculator.html').render(
-        #    calculators=calculator_mocks))
 
     def post(self, calculator_id):
         id = int(calculator_id)
@@ -35,6 +33,19 @@ class CalculatorHandler(BrewshedHandler):
             self.response.abort(httplib.NOT_FOUND)
         calculator = [calc for calc in calculator_mocks if calc['id'] == int(calculator_id)][0]
         self.response.write(json.dumps(calculator))
+
+
+class StrikeWaterHandler(BrewshedHandler):
+
+    @template('strike_water_calculator.html')
+    def get(self):
+        return
+
+    def post(self):
+        """
+        Process form data and return the result as json.
+        """
+        pass
 
 
 class AboutHandler(BrewshedHandler):
