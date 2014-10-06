@@ -14,6 +14,8 @@ To get started, simply type the following commands in you bash shell:
     $ virtualenv fortyTwo-env
     $ source fortyTwo-env/bin/activate
 
+Note, if you are using system python, make sure that development libraries and headers for python is available. On Ubuntu Linux, this for instance mean doing 'apt-get install python-dev'.
+
 Additionally, iPython is of great help:
 
     $ cd fortyTwo-env
